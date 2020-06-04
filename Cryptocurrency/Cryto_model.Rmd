@@ -73,12 +73,55 @@ BTC_data$Date <- as.Date(BTC_data$Date)
 BTC_data$Date
 View(BTC_data)
 
-
 ``` 
+```{r}
+
+#function for plotting
+
+feature_over_time <- function(data, feature_name){
+  feature <- data %>% select(feature_name)
+  feature_plot <- xts(feature, data$Date)
+  
+  dygraph(feature_plot, main = paste("Plot of ", feature_name)) %>% 
+    dySeries(feature_name, label = feature_name) %>%  
+    dyRangeSelector()
+  
+}
+```
 
 ```{r}
-class(BTC_data$Date)
 
+#list of column names
+
+names(BTC_data)
+```
+
+```{r}
+#Analyzing the features over time i.e. Date
+
+feature_over_time(BTC_data, names(BTC_data)[2])
+feature_over_time(BTC_data, names(BTC_data)[3])
+feature_over_time(BTC_data, names(BTC_data)[4])
+feature_over_time(BTC_data, names(BTC_data)[5])
+feature_over_time(BTC_data, names(BTC_data)[6])
+feature_over_time(BTC_data, names(BTC_data)[7])
+feature_over_time(BTC_data, names(BTC_data)[8])
+feature_over_time(BTC_data, names(BTC_data)[9])
+feature_over_time(BTC_data, names(BTC_data)[10])
+feature_over_time(BTC_data, names(BTC_data)[11])
+feature_over_time(BTC_data, names(BTC_data)[12])
+feature_over_time(BTC_data, names(BTC_data)[13])
+feature_over_time(BTC_data, names(BTC_data)[14])
+feature_over_time(BTC_data, names(BTC_data)[15])
+feature_over_time(BTC_data, names(BTC_data)[16])
+feature_over_time(BTC_data, names(BTC_data)[17])
+feature_over_time(BTC_data, names(BTC_data)[18])
+feature_over_time(BTC_data, names(BTC_data)[19])
+feature_over_time(BTC_data, names(BTC_data)[20])
+feature_over_time(BTC_data, names(BTC_data)[21])
+feature_over_time(BTC_data, names(BTC_data)[22])
+feature_over_time(BTC_data, names(BTC_data)[23])
+feature_over_time(BTC_data, names(BTC_data)[24])
 ```
 
 ```{r}
