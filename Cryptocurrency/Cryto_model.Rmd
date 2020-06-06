@@ -3,8 +3,9 @@
 output: html_notebook
 ---
 
-```{r}
 
+
+```{r}
 #installing the libraries
 #tidyverse include packages such as dplvr, ggplot, purr
 
@@ -17,6 +18,10 @@ library(dygraphs)
 
 #library for dygraph
 library(xts)
+
+#library for the correlation plot
+library(corrplot)
+
 ```
 
 
@@ -38,7 +43,7 @@ file_path = file.path('.', 'Data', 'bitcoin_dataset.csv')
 BTC_data <- read.csv(file = file_path, header = TRUE )
 BTC_data
 ```
-
+wegfhgj
 ```{r}
 # Reading the Column
 
@@ -116,8 +121,39 @@ feature_over_time(BTC_data, names(BTC_data)[24])
 ```
 
 ```{r}
+"
 btc_rev <- cbind(BTC_data$btc_n_transactions, BTC_data$btc_n_transactions_total)
 btc_rev_new <- xts(btc_rev, BTC_data$Date)
 dygraph(btc_rev_new) %>% dyRangeSelector()
+"
+```
+
+```{r}
+#Intially btc_trade_volume has 21 "na" values and they are replaced by the mean of the coulmn
+
+class(BTC_data$btc_trade_volume)
+BTC_data$btc_trade_volume[is.na(BTC_data$btc_trade_volume)] <- round(mean(BTC_data$btc_trade_volume, na.rm = TRUE))
+sum(is.na(BTC_data$btc_trade_volume))
+
+```
+
+```{r}
+plot_BTC <- cor(BTC_data[c(2:24)])
+corrplot(plot_BTC, method = "ellipse", tl.srt = 90, tl.col = "black", tl.cex = 0.54, title = "Correlation of Variables", mar=c(0,0,1,0))
+
+"
+from the graph it can be seen that the features 
+* btc_market_cap
+* btc_miners_revenue
+* btc_estimated_transaction_volume_usd
+* btc_hash_rate
+* btc_difficulty
+* btc_trade_volume
+"
+
+```
+```{r}
+help("corrplot")
+
 ```
 
